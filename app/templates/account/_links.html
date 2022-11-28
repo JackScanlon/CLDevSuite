@@ -1,0 +1,6 @@
+{% load i18n %}
+<div class="some-class">
+  <a class="anchor-class" href="/">{% trans "Home" %}</a>
+  <span class="spacer-class">/</span>
+  <a class="anchor-class" href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
+</div>

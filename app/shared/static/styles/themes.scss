@@ -1,0 +1,29 @@
+@mixin map-brand($map: ()) {
+  @each $key, $value in $map {
+    --#{$key}: #{$value};
+  }
+};
+
+@function theme($key) {
+  @return var(--#{$key});
+}
+
+@mixin app-background {
+  background-color: theme('body_color');
+}
+
+@mixin app-font-style($sz: false) {
+  font: theme('font_size') theme('font_name'), theme('font_family');
+  color: theme('text-accent-darkest');
+
+  @if $sz {
+    font-size: $sz;
+  }
+}
+
+:root[data-brand="none"],
+::after,
+::before {
+  @include map-brand($brand-map-none);
+}
+

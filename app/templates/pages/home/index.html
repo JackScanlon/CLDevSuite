@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% load breadcrumbs %}
+
+{% block title %}Concept Library - {% trans "Home" %}{% endblock title %}
+
+{% block bodyclass %}homepage{% endblock bodyclass %}
+
+{% block content %}
+  {% include "components/navigation.html" with homepage=True %}
+  
+  <main class="page-content whole-page">
+    {% breadcrumbs useMap=False includeHome=False includeHeader=True %}
+    {% endbreadcrumbs %}
+
+    <script type="text/javascript" src="{% static "js/homepage.js" %}"></script>
+
+    <section class="homepage-masthead">
+      <div class="container">
+        <div class="text">
+          <h1>Concept Library</h1>
+          <b>The concept library is a system for storing, managing, sharing, and documenting clinical code lists in health research.</b>
+          <p>Our goal is to create a system that describes research study designs in a machine-readable format to facilitate rapid study development; higher quality research; easier replication; and sharing of methods between researchers, institutions, and countries.</p>
+        </div>
+        <form class="search">
+          <input class="searchbar" aria-label="Search data" type="text" id="data-search" name="data-search" placeholder="Search..." minlength="3">
+          <span class="search-icon"></span>
+        </form>
+      </div>
+      <img class="image" src="/static/assets/img/HealthDataIllustration.png" alt="Health Data" draggable="false" />
+    </section>
+
+    <section class="homepage-analytics">
+      <div class="container">
+        <div class="card">
+          <div class="content">
+            <header>
+              <p>Working Sets</p>
+              <p id="analytics-counter" x-value="9" x-init="countup">0</p>
+            </header>
+            <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <header>
+              <p>Phenotypes</p>
+              <p id="analytics-counter" x-value="1160" x-init="countup">0</p>
+            </header>
+            <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <header>
+              <p>Concepts</p>
+              <p id="analytics-counter" x-value="2742" x-init="countup">0</p>
+            </header>
+            <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <header>
+              <p>Data Sources</p>
+              <p id="analytics-counter" x-value="483" x-init="countup">0</p>
+            </header>
+            <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <header>
+              <p>Research Papers</p>
+              <p id="analytics-counter" x-value="100" x-init="countup">0</p>
+            </header>
+            <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="homepage-information">
+      <header>
+        <span class="title">Our <span class="title feature">Features</span></span>
+      </header>
+      <div class="container">
+        <div class="image" id="fade-item">
+          <img src="/static/assets/img/HealthDataIllustration.png" alt="Health Data" draggable="false"/>
+        </div>
+        
+        <div class="feature-list">
+          <div class="items">
+            <div class="item" id="fade-item">
+              <span class="icon build"></span>
+              <div class="details">
+                <span class="title">Build</span>
+                <span class="text">Build codelists from our wide range of coding systems to define your phenotypes and concepts.</span>
+              </div>
+            </div>
+            <div class="item" id="fade-item">
+              <span class="icon repository"></span>
+              <div class="details">
+                <span class="title">Repository</span>
+                <span class="text">Store code lists along with metadata that captures important information about quality, author, etc.</span>
+              </div>
+            </div>
+            <div class="item" id="fade-item">
+              <span class="icon version"></span>
+              <div class="details">
+                <span class="title">Versioning</span>
+                <span class="text">Store version history and provide a way to unambiguously reference a particular version of a code list.</span>
+              </div>
+            </div>
+            <div class="item" id="fade-item">
+              <span class="icon algorithm"></span>
+              <div class="details">
+                <span class="title">Algorithms</span>
+                <span class="text">Provides programmatic interaction with codelists, and allows users to build their study's cohort.</span>
+              </div>
+            </div>
+            <div class="item" id="fade-item">
+              <span class="icon share"></span>
+              <div class="details">
+                <span class="title">Sharing</span>
+                <span class="text">Provide a mechanism for sharing code lists between projects and organizations.</span>
+              </div>
+            </div>
+            <div class="item" id="fade-item">
+              <span class="icon review"></span>
+              <div class="details">
+                <span class="title">Review</span>
+                <span class="text">Allow clinicians and other team members to review codelists.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="homepage-carousel">
+      <header>
+        <span class="title">Get Started</span>
+      </header>
+      <div class="container">
+        <div class="items">
+          <div class="item">
+            <span class="subtitle">Explore Data</span>
+            <span class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+            <button class="secondary-btn text-accent-darkest bold purple-accent" aria-label="Explore and Search" id="explore-btn">
+              Explore
+            </button>
+          </div>
+          <div class="item">
+            <span class="subtitle">Create Phenotype</span>
+            <span class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+            <button class="secondary-btn text-accent-darkest bold purple-accent" aria-label="Create Phenotype" id="create-btn">
+              Create
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="homepage-principles">
+      <header>
+        <span class="title"><span class="title feature">Key</span> Principles</span>
+      </header>
+      <div class="container">
+        <div class="principle">
+          <div class="details">
+            <span class="text">The Library stores phenotyping algorithms, metadata and tools only. No data are stored in the Library.</span>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="details">
+            <span class="text">Phenotype definitions will be assigned a unique Digital Object Identifier (DOI) to facilitate identification of the phenotype.</span>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="details">
+            <span class="text">Ideally, phenotypes that are deposited in the Library will have undergone some form of peer-review to assess validity and quality either through peer-reviewed publication or some other means of sharing the definition(s).</span>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="details">
+            <span class="text">Users should cite the Phenotype Library in all publications, presentations and reports as follows: “HDR UK CALIBER Phenotype Library https://portal.caliberresearch.org/”.</span>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="details">
+            <span class="text">All material deposited in the Library remain the intellectual property of the research group who created the phenotype(s) – the default licensing agreement that information is available under is the Creative Commons Attribution 4.0 (CC-A).</span>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="details">
+            <span class="text">The aim of the Library is not to standardize or harmonize disease definitions, therefore several phenotypes may be stored for the same condition and the onus is on individual researchers to explore which phenotypes they wish to use.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {% include "components/footer.html" %}
+  </main>
+{% endblock content %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %} Concept Library - Tasks Viewer {% endblock title %}
+
+{% block content %}
+  <main class="page-content">
+    <script type="text/javascript">
+      domReady.finally(() => {
+        document.querySelector('#run-task').addEventListener('click', e => {
+          e.preventDefault();
+          
+          fetch('/tasks/run-task').catch(error => console.error(error));
+        });
+      });
+    </script>
+    <header>
+      <h1>{% trans "Tasks Viewer" %}</h1>
+      <a href="#" id="run-task">Run Test Task</a>
+    </header>
+    <section class="content">
+      <table class="task-status">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Completed</th>
+            <th>State</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for task in task_list %}
+            <tr>
+              <td>{{ task.task_id }}</td>
+              <td>{{ task.task_name }}</td>
+              <td>{{ task.date_done }}</td>
+              <td>{{ task.status }}</td>
+            </tr>
+          {% empty %}
+            <tr class="empty"></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+  </main>
+{% endblock content %}

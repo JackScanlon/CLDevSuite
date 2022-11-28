@@ -1,0 +1,19 @@
+{% load static %}
+{% load i18n %}
+{% load sass_tags %}
+
+<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}" data-brand="none">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %} Django Boilerplate {% endblock title %}</title>
+    <link href="{% sass_src 'styles/main.scss' %}" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="{% static "js/utils.js" %}"></script>
+  </head>
+  <body class="{% block bodyclass %}{% endblock bodyclass %}">
+    {% block content %}
+    {% endblock content %}
+  </body>
+</html>

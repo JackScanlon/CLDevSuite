@@ -1,0 +1,158 @@
+$transparent: rgba(255, 255, 255, 0);
+$white: rgb(255, 255, 255);
+$off_white: rgb(251, 251, 250);
+$off_white02: rgb(247, 247, 247);
+$black: rgb(0, 0, 0);
+$transparent_black: rgba(0, 0, 0, 0.4);
+$near-black: rgb(40, 40, 40);
+$blackish-grey: rgb(82, 82, 82);
+$dark_grey: rgb(140, 140, 140);
+$light_grey: rgb(170, 170, 170);
+$lightest_grey: rgb(220, 220, 220);
+$soft_blue: rgb(140, 192, 222);
+$softer_blue: rgb(175, 223, 255);
+$soft_cyan: rgb(204, 243, 238);
+$pixie_green: rgb(196, 223, 170);
+$lime_green: rgb(133,213,126);
+$pastel_red: rgb(255, 135, 135);
+$mod_cyan: rgb(84, 186, 185);
+$bright_blue: rgb(0, 0, 255);
+$royal_blue: rgb(62, 119, 232);
+$navy_blue: rgb(26, 90, 217);
+$solitude: rgb(223, 233, 255);
+$periwinkle: rgba(191, 216, 255, 1);
+$indigo: rgb(90, 103, 216);
+$cornflower_blue: rgb(102, 126, 234);
+$mystic: rgb(245, 248, 255);
+
+$brand-map-none: (
+  'anim_speed': 250ms,
+  
+  'logo_url': url('/static/assets/logo/ConceptLibrary.png'),
+  'body_color': $white,
+  'scrollbar_color': $transparent_black,
+  'anchor_color': $bright_blue,
+
+  'transparent': $transparent,  
+  'accent-primary': $soft_blue,
+  'accent-secondary': $soft_cyan,
+  'accent-tertiary': $pixie_green,
+  'accent-highlight': $mod_cyan,
+  'accent-danger': $pastel_red,
+  'accent-washed': $lightest_grey,
+  'accent-dark': $black,
+  'accent-bright': $white,
+  'accent-grey': $light_grey,
+  'accent-off-body': $off_white,
+  'accent-dark-wash': $mystic,
+  'accent-purple': $solitude,
+
+  'masthead_gutter': 12rem,
+  'masthead_mobile_gutter': 1rem,
+  'homepage-background-color': $solitude,
+  'masthead-dropshadow-color': $periwinkle,
+  'homepage-feature-color': $indigo,
+  'homepage-feature-icon-color': $cornflower_blue,
+
+  'text-accent-darkest': $black,
+  'text-accent-darker': $near-black,
+  'text-accent-dark': $blackish-grey,
+  'text-accent-brightest': $white,
+  'text-accent-washed': $dark_grey,
+
+  'font_name': "Montserrat",
+  'font_family': sans-serif,
+  'font_size': 14px,
+
+  'icons_name': var(--fa-style-family-classic),
+  'icons_style': var(--fa-font-solid),
+  'icons_size': 1rem,
+  'hamburger_size': 1.5rem,
+  
+  'navigation_offset': 1.5rem,
+  'navigation_gutter': 6rem,
+  'navigation_mobile_offset': 1rem,
+  'navigation_mobile_gutter': 1rem,
+  'navigation_height': 2rem,
+  'navigation_line_width': 0.15rem,
+  'navigation_selection_box': $white,
+  'navigation_item_selector': $soft_cyan,
+  'navigation_scroll_shadow': "0px 2px 5px 0px rgba(0, 0, 0, .3)",
+  'navigation_panel_shadow': "0px 5px 15px -1px rgba(0, 0, 0, 0.5)",
+
+  'main_gutter': 6rem,
+  'main_mobile_gutter': 1rem,
+  'header_gutter': 0rem,
+  'footer_gutter': 0rem,
+  'footer_mobile_gutter': 0rem,
+  'footer_top_offset': 1rem,
+  'footer_bottom_offset': 1rem,
+  'main_pad_top': 6rem,
+
+  'breadcrumb_color': $dark_grey,
+  'breadcrumb_hover_color': $black,
+  'breadcrumb_active_weight': bold,
+
+  'article-sm-size': 55%,
+  'article-lg-size': 100%,
+  'article-header-border': $light_grey,
+
+  'footer-copyright-size': 10px,
+  'footer-text-size': 12px,
+  'footer-row-gap': 4rem,
+
+  'wizard-aside-box-shadow': "0px 0px 7px -2px rgb(0, 0, 0, 0.3)",
+  'wizard-aside-color': $off_white,
+  'wizard-aside-header-size': 18px,
+
+  'wizard-h1-size': 36px,
+  'wizard-h1-weight': bold,
+  'wizard-h2-size': 32px,
+  
+  'wizard-min-step-height': 4rem,
+  'wizard-tracker-offset': -1.5rem,
+  'wizard-tracker-width': 2px,
+  'wizard-tracker-color': $light_grey,
+  'wizard-tracker-active-color': $pixie_green,
+  'wizard-counter-border-color-off': $light_grey,
+  'wizard-counter-border-width': 2px,
+  'wizard-counter-bg-color': $white,
+  'wizard-counter-size': 26px,
+  'wizard-counter-text-color': $black,
+  'wizard-counter-text-weight': bold,
+  'wizard-counter-text-size': 12px,
+
+  'wizard-step-header-color': $black,
+  'wizard-step-header-size': 28px,
+  'wizard-step-header-weight': bold,
+  'wizard-step-desc-size': 16px,
+  'wizard-step-desc-sm-size': 14px,
+
+  'wizard-input-label-size': 18px,
+  'wizard-input-label-mrg-top': 0.75rem,
+  'wizard-input-label-sm-size': 14px,
+  'wizard-input-label-sm-mrg-top': 0.25rem,
+  'wizard-input-label-weight': bold,
+  'wizard-input-border-color': $black,
+  'wizard-input-focus-border-color': $black,
+  'wizard-max-codelist-size': 200px,
+  'wizard-max-publication-size': 200px,
+  'wizard-publication-highlight': $lightest_grey,
+
+  'concept-item-border': $lightest_grey,
+  'concept-item-odd-bg-color': $white,
+  'concept-item-even-bg-color': $off_white02,
+
+  'modal-header-color': $black,
+  'modal-header-weight': bold,
+  'modal-header-size': 18px,
+  'modal-input-label-size': 16px,
+
+  'quit-button-normal-color': $blackish-grey,
+  'quit-button-hover-color': $pastel_red,
+
+  'ruleset-bg-color': $lightest_grey,
+  'ruleset-icon-normal-color': $dark_grey,
+  'ruleset-include-icon-checked-color': $lime_green,
+  'ruleset-exclude-icon-checked-color': $pastel_red,
+);

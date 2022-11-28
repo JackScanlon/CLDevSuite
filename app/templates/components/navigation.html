@@ -1,0 +1,23 @@
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+  <script type="text/javascript" src="{% static "js/navigation.js" %}"></script>
+  <nav class="page-navigation" {% if homepage %} data-home="true" {% endif %}>
+    <section class="container">
+      <section class="logo"></section>
+      <section class="buttons">
+        <section class="items">
+          {% url 'pages:home' as home_url %}
+          <a href="{% url 'pages:home' %}" id="Home" class="{% if request.path == home_url %}active{% endif %}">{% trans "Home" %}</a>
+          <a href="#" id="Phenotypes">Phenotypes</a>
+          <a href="#" id="WorkingSets">WorkingSets</a>
+          <a href="#" id="API">API</a>
+          <a href="#" id="About">{% trans "About" %}</a>
+
+          <a href="{% url 'account_login' %}" id="Login" role="login">{% trans "Login" %}</a>
+        </section>
+      </section>
+    </section>
+  </nav>
+{% endblock content %}

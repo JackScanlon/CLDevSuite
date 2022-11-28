@@ -1,0 +1,132 @@
+// Variables
+.square {
+  $size: 100px;
+
+  width: $size;
+  height: $size;
+  border-radius: $size * 0.5;
+}
+
+// Variable maps
+@use 'sass:map';
+
+$SAIL-theme: (
+  'accent-primary': blue,
+  'accent-secondary': lightblue,
+  'accent-background': white,
+);
+
+.button {
+  background-color: map.get($SAIL-theme, 'accent-primary');
+}
+
+// Functions
+@function add-together($a, $b) {
+  @return $a + $b;
+}
+
+.square {
+  $size: add-together(50px, 50px);
+
+  height: $size;
+  aspect-ratio: 1 / 1;
+}
+
+// Extending classes
+.square:hover {
+  transform: scale(1.1);
+}
+
+.square-round {
+  @extend .square;
+
+  border-radius: 0.25rem;
+}
+
+// Parent selector & nested inheritance
+.square {
+  transition: all 0.25s ease;
+
+  &:not([disabled]):hover {
+    transform: scale(1.1);
+  }
+
+  &:not([disabled]):has(.green):hover {
+    background-color: green;
+  }
+  
+  // Sibling .square
+  & + .square {
+    border-radius: 0.25rem;
+  }
+
+  // Children
+  .inner-square {
+    transition: all 0.25s ease;
+    background-color: white;
+
+    &:hover {
+      transform: scale(0.95);
+    }
+  }
+}
+
+// Interpolation
+@mixin square {
+  $size: 100px;
+  width: $size;
+  height: $size;
+  border-radius: $size * 0.5;
+}
+
+.white-square {
+  @include square();
+
+  background-color: white;
+}
+
+// Arguments
+@mixin square($size: 50px, $color: red) {
+  width: $size;
+  height: $size;
+  border-radius: $size * 0.5;
+  background-color: $color;
+}
+
+.some-cool-class {
+  @include square(100px, rgb(255, 255, 255));
+
+  display: block;
+  font-size: 1em;
+}
+
+// Logic
+@mixin flex-col($gap: false) {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  @if $gap {
+    gap: $gap;
+  }
+}
+
+.some-container {
+  @include flex-col($gap: 0.5rem);
+
+  justify-content: space-evenly;
+}
+
+// Arbitrary arguments
+@mixin growing-blocks($start-size, $increment, $selectors...) {
+  @for $i from 0 to length($selectors) {
+    #{nth($selectors, $i + 1)} {
+      position: absolute;
+      height: $start-size + $i * $increment
+    }
+  }
+}
+
+.some-block-container {
+  @include growing-blocks(50px, 50px, 'div.first-block', 'div.second-block', 'div.third-block');
+}
