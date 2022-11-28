@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% load breadcrumbs %}
+
+{% block title %}Concept Library - {% trans "Phenotypes" %}{% endblock title %}
+
+{% block bodyclass %}homepage{% endblock bodyclass %}
+
+{% block content %}
+  {% include "components/navigation.html" with homepage=True %}
+  
+  <main class="page-content whole-page">
+    {% breadcrumbs useMap=False includeHome=False includeHeader=True %}
+    {% endbreadcrumbs %}
+
+    <section class="homepage-masthead">
+      <div class="container">
+        <div class="text">
+          <h1>Concept Library</h1>
+          <b>The concept library is a system for storing, managing, sharing, and documenting clinical code lists in health research.</b>
+          <p>Our goal is to create a system that describes research study designs in a machine-readable format to facilitate rapid study development; higher quality research; easier replication; and sharing of methods between researchers, institutions, and countries.</p>
+        </div>
+        <form class="search">
+          <input class="searchbar" aria-label="Search data" type="text" id="data-search" name="data-search" placeholder="Search..." minlength="3">
+          <span class="search-icon"></span>
+        </form>
+      </div>
+      <img class="image" src="/static/assets/img/HealthDataIllustration.png" alt="Health Data" draggable="false" />
+    </section>
+
+    {% include "components/footer.html" %}
+  </main>
+{% endblock content %}

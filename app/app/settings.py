@@ -22,6 +22,14 @@ BREADCRUMB_MAP = {
         'url': 'pages:home',
         'title': 'Home'
     },
+    'phenotypes': {
+        'url': 'phenotypes:phenotypes',
+        'title': 'Phenotypes'
+    },
+    'create-phenotypes': {
+        'url': 'phenotypes:create_phenotypes',
+        'title': 'Create Phenotypes'
+    },
     'login': {
         'url': 'account_login',
         'title': 'Login'
@@ -97,6 +105,7 @@ TEMPLATES = [
             ],
             'libraries': {
                 'breadcrumbs': 'apps.core.templatetags.breadcrumbs',
+                'tooling': 'apps.core.templatetags.tooling',
             },
             'debug': DEBUG,
         },

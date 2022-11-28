@@ -108,7 +108,7 @@ class BreadcrumbsNode(template.Node):
           if look_up[0] == 'apps':
             root = f'{look_up[1]}:'
           
-          crumbs.append({'url': root + url.name, 'title': 'Home' if crumb == '' else crumb.capitalize() })
+          crumbs.append({'url': root + url.name, 'title': 'Home' if crumb == '' else crumb.replace('-', ' ').title() })
 
     if len(crumbs) > 0:
       crumbs[-1]['url'] = rqst.get_full_path()
@@ -117,7 +117,7 @@ class BreadcrumbsNode(template.Node):
 
   def render(self, context):
     rqst = self.request.resolve(context)
-    path = rqst.get_full_path().split('/')[:-1]
+    path = rqst.get_full_path().split('/')
 
     if len(path) > 0:
       if self.params['useMap']:

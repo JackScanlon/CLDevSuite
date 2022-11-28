@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-18 09:28+0000\n"
+"POT-Creation-Date: 2022-11-28 10:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/settings.py:143
+#: app/settings.py:151
 msgid "English"
 msgstr ""
 
@@ -206,6 +206,10 @@ msgstr ""
 
 #: templates/components/navigation.html:18
 msgid "Login"
+msgstr ""
+
+#: templates/phenotype/index.html:6
+msgid "Phenotypes"
 msgstr ""
 
 #: templates/tasks/result.html:19

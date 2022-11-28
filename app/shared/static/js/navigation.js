@@ -1,5 +1,5 @@
 const updateNavBarStyle = (navbar) => {
-  const isHome = typeof navbar.getAttribute('data-home') !== 'undefined';
+  const isHome = typeof navbar.getAttribute('data-home') !== 'object';
   const y = window.scrollY;
   if (y >= navbar.offsetHeight/2 - navbar.offsetTop) {
     navbar.classList.add('scrolled');
