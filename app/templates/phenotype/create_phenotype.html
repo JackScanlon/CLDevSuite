@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load static %}
 {% load breadcrumbs %}
+{% load sass_tags %}
 
 {% block title %} Concept Library - Create Phenotype {% endblock title %}
 
@@ -11,6 +13,25 @@
     {% breadcrumbs useMap=False includeHome=True includeHeader=True %}
     {% endbreadcrumbs %}
     
+    {% if phenotype is not None %}
+    <script type="text/javascript">
+      var phenotype = {{ phenotype|safe }};
+    </script>
+    {% endif %}
+
+    <script type="text/javascript">
+      var phenotype_types = {{ phenotype_types|safe }};
+      var coding_system = {{ coding_system|safe }};
+      var tags = {{ tags|safe }};
+      var collections = {{ collections|safe }};
+      var data_sources = {{ data_sources|safe }};
+    </script>
+    
+    <link href="{% sass_src 'vendor/lightpick/lightpick.scss' %}" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="{% static "vendor/moment/moment.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "vendor/lightpick/lightpick.js" %}"></script>
+    <script type="module" src="{% static "js/phenotype/creation-wizard.js" %}"></script>
+
     <aside class="steps-wizard">
       <section class="steps-panel" onselectstart="return false;">
         <span class="wizard-header">Skip to step...</span>
@@ -43,15 +64,23 @@
           <input class="text-input" aria-label="Phenotype Name" type="text" id="phenotype-name" name="phenotype-name" placeholder="" minlength="3" pattern="w{1,}.*?" required>
           <p class="input">Event date range</p>
           <p class="description sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <input class="date-input" aria-label="Phenotype event date range" type="date" id="phenotype-entry-date" name="phenotype-entry-date" value="2022-11-08" min="2018-01-01" max="2023-10-11" pattern="d{4}-d{2}-d{2}" required>
+          <fieldset class="date-range-field">
+            <input type="text" class="date-range-picker" aria-label="Phenotype event date range" id="phenotype-entry-range" name="phenotype-entry-date" required />
+          </fieldset>
+          <p class="input">Sex</p>
+          <p class="description sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <form class="radio-group">
+            <input class="radio-input" aria-label="Phenotype gender is Unisex" type="radio" id="unisex-gender" name="phenotype-sex" checked>
+            <label for="unisex-gender">Male / Female</label>
+            <input class="radio-input" aria-label="Phenotype gender is Male" type="radio" id="male-gender" name="phenotype-sex">
+            <label for="male-gender">Male</label>
+            <input class="radio-input" aria-label="Phenotype gender is Female" type="radio" id="female-gender" name="phenotype-sex">
+            <label for="female-gender">Phenotype</label>
+          </form>
           <p class="input">Type</p>
           <p class="description sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           <select class="selection-input" aria-label="Select Phenotype Type" name="phenotype-type" id="phenotype-type" required>
-            <option disabled value="" selected hidden>Select</option>
-            <option value="0">Biomarker</option>
-            <option value="1">Disease or Syndrome</option>
-            <option value="2">Drug</option>
-            <option value="3">Lifestyle Risk Factor</option>
+            <option disabled value="0" selected hidden>Select</option>
           </select>
           <p class="input">Tags</p>
           <p class="description sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -59,6 +88,9 @@
           <p class="input">Collections</p>
           <p class="description sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           <input class="text-input" aria-label="Phenotype Collections" type="text" id="phenotype-collections" name="phenotype-collections" placeholder="Add Collection...">
+          <p class="input">Data Sources</p>
+          <p class="description sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <input class="text-input" aria-label="Phenotype Data Sources" type="text" id="phenotype-datasources" name="phenotype-datasources" placeholder="Add Data Source...">
         </li>
 
         <li class="progress-item" id="concept-progress">
@@ -72,112 +104,11 @@
             </section>
             <section class="concept-list">
               <section class="concept-interaction">
+                <button class="secondary-btn text-accent-darkest bold icon create-icon secondary-accent" aria-label="Import Concept" id="import-concept-btn">Import from Concept</button>
                 <button class="secondary-btn text-accent-darkest bold icon import-icon secondary-accent" aria-label="Create new Concept" id="create-concept-btn">New Concept</button>
               </section>
-              <section class="concept-group"><span class="concept-item is-open"><span class="contextual-icon"></span>
-                  <label class="concept-name">Some concept name</label><span class="concept-buttons"><span class="edit-icon"></span><span class="delete-icon"></span></span></span>
-                <section class="concept-content">
-                  <section class="content">
-                    <section class="concept-content-details">
-                      <label>Codelist</label>
-                      <ul class="chips-group" id="coding-system-chip">
-                        <li class="chip bold washed-accent text-accent-darkest codelist-icon icon-accent-highlight"><a href="#" id="coding-system-info">ICD-10</a></li>
-                      </ul>
-                    </section>
-                    <section class="codelist">
-                      <section class="codelist-header">
-                        <label>Rule</label>
-                        <label>Code</label>
-                        <label>Description</label>
-                        <label>Source</label>
-                      </section>
-                      <section class="codelist-content">
-                        <div class="codelist-item">
-                          <label class="rule inclusion-rule" id="rule" value="true"></label>
-                          <label class="item" id="code">C30.0</label>
-                          <label class="wrap" id="desc">Malignant neoplasms of respiratory and intrathoracic organs</label>
-                          <label class="item" id="source">Searchterm</label>
-                        </div>
-                        <div class="codelist-item">
-                          <label class="rule inclusion-rule" id="rule" value="false"></label>
-                          <label class="item" id="code">C30.0</label>
-                          <label class="wrap" id="desc">Malignant neoplasms of respiratory and intrathoracic organs</label>
-                          <label class="item" id="source">Searchterm</label>
-                        </div>
-                      </section>
-                    </section>
-                  </section>
-                </section>
-              </section>
-              <section class="concept-group"><span class="concept-item"><span class="contextual-icon"></span>
-                  <label class="concept-name">Some concept name</label><span class="concept-buttons"><span class="edit-icon"></span><span class="delete-icon"></span></span></span>
-                <section class="concept-content">
-                  <section class="content">
-                    <section class="concept-content-details">
-                      <label>Codelist</label>
-                      <ul class="chips-group" id="coding-system-chip">
-                        <li class="chip bold washed-accent text-accent-darkest codelist-icon icon-accent-highlight"><a href="#" id="coding-system-info">ICD-10</a></li>
-                      </ul>
-                    </section>
-                    <section class="codelist">
-                      <section class="codelist-header">
-                        <label>Rule</label>
-                        <label>Code</label>
-                        <label>Description</label>
-                        <label>Source</label>
-                      </section>
-                      <section class="codelist-content">
-                        <div class="codelist-item">
-                          <label class="rule inclusion-rule" id="rule" value="true"></label>
-                          <label class="item" id="code">C30.0</label>
-                          <label class="wrap" id="desc">Malignant neoplasms of respiratory and intrathoracic organs</label>
-                          <label class="item" id="source">Searchterm</label>
-                        </div>
-                        <div class="codelist-item">
-                          <label class="rule inclusion-rule" id="rule" value="false"></label>
-                          <label class="item" id="code">C30.0</label>
-                          <label class="wrap" id="desc">Malignant neoplasms of respiratory and intrathoracic organs</label>
-                          <label class="item" id="source">Searchterm</label>
-                        </div>
-                      </section>
-                    </section>
-                  </section>
-                </section>
-              </section>
-              <section class="concept-group"><span class="concept-item"><span class="contextual-icon"></span>
-                  <label class="concept-name">Some concept name</label><span class="concept-buttons"><span class="edit-icon"></span><span class="delete-icon"></span></span></span>
-                <section class="concept-content">
-                  <section class="content">
-                    <section class="concept-content-details">
-                      <label>Codelist</label>
-                      <ul class="chips-group" id="coding-system-chip">
-                        <li class="chip bold washed-accent text-accent-darkest codelist-icon icon-accent-highlight"><a href="#" id="coding-system-info">ICD-10</a></li>
-                      </ul>
-                    </section>
-                    <section class="codelist">
-                      <section class="codelist-header">
-                        <label>Rule</label>
-                        <label>Code</label>
-                        <label>Description</label>
-                        <label>Source</label>
-                      </section>
-                      <section class="codelist-content">
-                        <div class="codelist-item">
-                          <label class="rule inclusion-rule" id="rule" value="true"></label>
-                          <label class="item" id="code">C30.0</label>
-                          <label class="wrap" id="desc">Malignant neoplasms of respiratory and intrathoracic organs</label>
-                          <label class="item" id="source">Searchterm</label>
-                        </div>
-                        <div class="codelist-item">
-                          <label class="rule inclusion-rule" id="rule" value="false"></label>
-                          <label class="item" id="code">C30.0</label>
-                          <label class="wrap" id="desc">Malignant neoplasms of respiratory and intrathoracic organs</label>
-                          <label class="item" id="source">Searchterm</label>
-                        </div>
-                      </section>
-                    </section>
-                  </section>
-                </section>
+              <section class="no-available-concepts" id="no-available-concepts">
+                <p class="concepts-message">You haven't added any concepts yet</p>
               </section>
             </section>
           </section>
@@ -193,14 +124,10 @@
               <p class="input sm">Coding System</p>
               <p class="description sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               <select class="selection-input" aria-label="Select Coding System" name="concept-coding-system" id="concept-coding-system" required>
-                <option disabled value="" selected hidden>Select</option>
-                <option value="0">Read Codes v2</option>
-                <option value="1">ICD-10 Codes</option>
-                <option value="2">Med Codes</option>
-                <option value="3">SNOMED CT Codes</option>
+                <option disabled value="0" selected hidden>Select</option>
               </select>
             </section>
-            <section class="codelist-area">
+            <section class="codelist-area" id="codelist-creation-area">
               <section class="codelist-controls">
                 <section class="details">
                   <p class="input sm">Codelist</p>
@@ -218,59 +145,9 @@
                 </section>
               </section>
               <section class="component-view hide" id="component-view-area">
-                <section class="component-group"><span class="component-item is-open"><span class="contextual-icon"></span>
-                    <label class="component-name">"Neoplasms"</label></span>
-                  <section class="component-content">
-                    <section class="content">
-                      <section class="component-content-details">
-                        <label>Codelist</label>
-                      </section>
-                      <section class="codelist components">
-                        <section class="codelist-header">
-                          <label>Rule</label>
-                          <label>Code</label>
-                          <label>Description</label>
-                        </section>
-                        <section class="codelist-content">
-                          <div class="codelist-item">
-                            <label class="rule" id="rule">
-                              <form class="rule-button-group">
-                                <input class="ruleset-button include" aria-label="Inclusion Rule" type="radio" id="include" name="ruleset" checked>
-                                <input class="ruleset-button exclude" aria-label="Exclusion Rule" type="radio" id="exclude" name="ruleset">
-                                <input class="ruleset-button remove" aria-label="Remove code" type="radio" id="remove" name="ruleset">
-                              </form>
-                            </label>
-                            <label class="item" id="code">C30.0</label>
-                            <label class="wrap" id="desc">Malignant neoplasms of respiratory and intrathoracic organs</label>
-                          </div>
-                          <div class="codelist-item">
-                            <label class="rule" id="rule">
-                              <form class="rule-button-group">
-                                <input class="ruleset-button include" aria-label="Inclusion Rule" type="radio" id="include" name="ruleset" checked>
-                                <input class="ruleset-button exclude" aria-label="Exclusion Rule" type="radio" id="exclude" name="ruleset">
-                                <input class="ruleset-button remove" aria-label="Remove code" type="radio" id="remove" name="ruleset">
-                              </form>
-                            </label>
-                            <label class="item" id="code">C30.0</label>
-                            <label class="wrap" id="desc">Malignant neoplasms of respiratory and intrathoracic organs</label>
-                          </div>
-                        </section>
-                      </section>
-                    </section>
-                  </section>
-                </section>
-                <section class="component-group"><span class="component-item"><span class="contextual-icon"></span>
-                    <label class="component-name">Imported.csv</label></span>
-                  <section class="component-content"></section>
-                </section>
-                <section class="component-group"><span class="component-item"><span class="contextual-icon"></span>
-                    <label class="component-name">Codelist View</label></span>
-                  <section class="component-content"></section>
-                </section>
-                <section class="component-group"><span class="component-item"><span class="contextual-icon"></span>
-                    <label class="component-name">PH123/23 → C456/89</label></span>
-                  <section class="component-content"></section>
-                </section>
+                <div class="no-component" id="no-components-result">
+                  <p>You haven't added any codes yet</p>
+                </div>
               </section>
               <section class="codelist mrg-bottom" id="codelist-view-area">
                 <section class="codelist-header creation">
@@ -280,66 +157,23 @@
                   <label>Source</label>
                 </section>
                 <section class="codelist-content">
-                  <div class="codelist-creation-item">
-                    <label class="rule" id="rule">
-                      <form class="rule-button-group">
-                        <input class="ruleset-button include" aria-label="Inclusion Rule" type="radio" id="include" name="ruleset" checked>
-                        <input class="ruleset-button exclude" aria-label="Exclusion Rule" type="radio" id="exclude" name="ruleset">
-                        <input class="ruleset-button remove" aria-label="Remove code" type="radio" id="remove" name="ruleset">
-                      </form>
-                    </label>
-                    <label class="item" id="code">C30.0</label>
-                    <label class="wrap" id="desc">Malignant neoplasms of respiratory and intrathoracic organs</label>
-                    <label class="item" id="source"><a class="codelist-term" title="Selected from the codelist view">Codelist View</a></label>
-                  </div>
-                  <div class="codelist-creation-item">
-                    <label class="rule" id="rule">
-                      <form class="rule-button-group">
-                        <input class="ruleset-button include" aria-label="Inclusion Rule" type="radio" id="include" name="ruleset" checked>
-                        <input class="ruleset-button exclude" aria-label="Exclusion Rule" type="radio" id="exclude" name="ruleset">
-                        <input class="ruleset-button remove" aria-label="Remove code" type="radio" id="remove" name="ruleset">
-                      </form>
-                    </label>
-                    <label class="item" id="code">C30.0</label>
-                    <label class="wrap" id="desc">Malignant neoplasms of respiratory and intrathoracic organs</label>
-                    <label class="item" id="source"><a class="search-term" title="Search term used to find this code">"Neoplasms"</a></label>
-                  </div>
-                  <div class="codelist-creation-item">
-                    <label class="rule" id="rule">
-                      <form class="rule-button-group">
-                        <input class="ruleset-button include" aria-label="Inclusion Rule" type="radio" id="include" name="ruleset" checked>
-                        <input class="ruleset-button exclude" aria-label="Exclusion Rule" type="radio" id="exclude" name="ruleset">
-                        <input class="ruleset-button remove" aria-label="Remove code" type="radio" id="remove" name="ruleset">
-                      </form>
-                    </label>
-                    <label class="item" id="code">C30.0</label>
-                    <label class="wrap" id="desc">Malignant neoplasms of respiratory and intrathoracic organs</label>
-                    <label class="item" id="source"><a class="file-import" title="Imported from file">Imported.csv</a></label>
-                  </div>
-                  <div class="codelist-creation-item">
-                    <label class="rule" id="rule">
-                      <form class="rule-button-group">
-                        <input class="ruleset-button include" aria-label="Inclusion Rule" type="radio" id="include" name="ruleset" checked>
-                        <input class="ruleset-button exclude" aria-label="Exclusion Rule" type="radio" id="exclude" name="ruleset">
-                        <input class="ruleset-button remove" aria-label="Remove code" type="radio" id="remove" name="ruleset">
-                      </form>
-                    </label>
-                    <label class="item" id="code">C30.0</label>
-                    <label class="wrap" id="desc">Malignant neoplasms of respiratory and intrathoracic organs</label>
-                    <label class="item" id="source"><a class="concept-import" title="Imported from existing Concept">PH123/23 → C456/89</a></label>
+                  <div class="no-codes-item" id="no-codelist-result">
+                    <p>You haven't added any codes yet</p>
                   </div>
                 </section>
               </section>
             </section>
-            <section class="codelist-search">
+            <section class="codelist-search" id="codelist-search-area">
               <section class="codelist-search-details">
                 <section class="details">
                   <p class="input sm">Add Codes</p>
-                  <p class="description sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p class="description sm">You can import a codelist from file, or by searching below. You can search by term, which will match the code or description, or by wildcard. </p>
+                  <br/>
+                  <p class="description sm">To search by wildcard, please enter 'wildcard:' followed by a regex pattern.</p>
+                  <p class="description sm">e.g. wildcard:a([0-9]*)</p>
                 </section>
                 <section class="buttons">
                   <div class="group">
-                    <button class="secondary-btn text-accent-darkest bold icon create-icon secondary-accent" aria-label="Import Concept" id="import-concept-btn">Import from Concept</button>
                     <button class="secondary-btn icon file-icon text-accent-darkest bold secondary-accent" aria-label="Import codes from file" id="import-file-btn">Import from file</button>
                   </div>
                 </section>
@@ -351,26 +185,13 @@
                     <input class="checkbox-input" aria-label="Add code all codes" type="checkbox" id="select-all-codes" name="select-all-codes">
                     <label for="select-all-codes">Add All</label>
                   </form>
-                  <label class="result-details show">Found 2 Code(s)</label>
+                  <label class="result-details show" id="codesearch-result-count">Found 0 Code(s)</label>
                 </section>
-                <section class="no-results">
+                <section class="no-results" id="no-codesearch-results">
                   <label class="text">Your search did not match any codes...</label>
                 </section>
-                <section class="results show">
-                  <div class="codelist-result-item">
-                    <form class="checkbox-group">
-                      <input class="checkbox-input" aria-label="Add code" type="checkbox" id="select-code_0" name="select-code_0">
-                      <label class="code" for="select-code_0">C30.0</label>
-                      <label class="desc" for="select-code_0">Malignant neoplasms of respiratory and intrathoracic organs</label>
-                    </form>
-                  </div>
-                  <div class="codelist-result-item">
-                    <form class="checkbox-group">
-                      <input class="checkbox-input" aria-label="Add code" type="checkbox" id="select-code_1" name="select-code_1">
-                      <label class="code" for="select-code_1">C30.0</label>
-                      <label class="desc" for="select-code_1">Malignant neoplasms of respiratory and intrathoracic organs</label>
-                    </form>
-                  </div>
+                <section class="results" id="codelist-search-results">
+                  
                 </section>
               </section>
             </section>
@@ -426,26 +247,16 @@
         <li class="progress-item" id="permission-progress">
           <label class="header">Permissions</label>
           <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <p class="input">Groups</p>
-          <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <p class="description normal">Select the group, if any:</p>
+          <p class="input">Assign to Organisation</p>
+          <p class="description">If you assign this phenotype to an organisation the members of that group will control its permissions, including read and write access.</p>
+          <p class="description normal">Select from your linked organisations:</p>
           <select class="selection-input" aria-label="Select Phenotype Group" name="phenotype-group" id="phenotype-group" required>
-            <option disabled value="" selected hidden>Select</option>
+            <option disabled value="0" selected hidden>Select</option>
             <option value="0">ADP</option>
             <option value="1">HDRUK</option>
             <option value="2">BREATHE</option>
             <option value="3">SAIL</option>
           </select>
-          <p class="input">Group read and write access</p>
-          <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <form class="radio-group">
-            <input class="radio-input" aria-label="No group access" type="radio" id="group-no-access" name="group-access" checked>
-            <label for="group-no-access">No access</label>
-            <input class="radio-input" aria-label="Group able to view" type="radio" id="group-view-access" name="group-access">
-            <label for="group-view-access">Read</label>
-            <input class="radio-input" aria-label="Group able to edit" type="radio" id="group-edit-access" name="group-access">
-            <label for="group-edit-access">Read and write</label>
-          </form>
           <p class="input">All other users</p>
           <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
           <form class="radio-group">
@@ -469,6 +280,6 @@
       </section>
     </article>
 
-    {% include "components/footer.html"}
+    {% include "components/footer.html" %}
   </main>
 {% endblock content %}

@@ -50,7 +50,7 @@ try:
         code = result.group(1)
         desc = result.group(2)
 
-        new_code = Code(code=code, description=desc)
+        new_code = Code(code=code, description=desc, coding_system=coding_system)
         new_code.save()
         new_codelist.codes.add(new_code)
       else:

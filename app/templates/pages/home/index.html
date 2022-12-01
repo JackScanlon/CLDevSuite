@@ -14,7 +14,7 @@
     {% breadcrumbs useMap=False includeHome=False includeHeader=True %}
     {% endbreadcrumbs %}
 
-    <script type="text/javascript" src="{% static "js/homepage.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/pages/home/homepage.js" %}"></script>
 
     <section class="homepage-masthead">
       <div class="container">
@@ -155,7 +155,7 @@
           <div class="item">
             <span class="subtitle">Create Phenotype</span>
             <span class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-            <button class="secondary-btn text-accent-darkest bold purple-accent" aria-label="Create Phenotype" id="create-btn">
+            <button class="secondary-btn text-accent-darkest bold purple-accent" aria-label="Create Phenotype" id="create-btn" data-href="{% url 'phenotypes:create_phenotype' %}">
               Create
             </button>
           </div>

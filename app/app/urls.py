@@ -6,5 +6,6 @@ urlpatterns = [
     path('accounts/', include('apps.accounts.urls')),
     path('tasks/', include('apps.tasks.urls')),
     path('phenotypes/', include('apps.phenotypes.urls')),
+    path('codelist/', include('apps.codelist.urls')),
     path('admin/', admin.site.urls),
 ]

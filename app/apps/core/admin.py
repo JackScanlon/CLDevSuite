@@ -3,7 +3,7 @@ from .models import Brand, Tag, Collection, DataSource, PublicationStatus
 
 @admin.register(Brand)
 class BrandAdmin(admin.ModelAdmin):
-  list_display = ['id', 'site_title', 'name', 'owner']
+  list_display = ['id', 'name', 'owner', 'description', 'website', 'logo_path']
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):

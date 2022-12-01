@@ -53,7 +53,6 @@ class Collection(models.Model):
 
 class DataSource(models.Model):
   id = models.AutoField(primary_key=True)
-  uuid = models.CharField(max_length=250)
 
   name = models.CharField(max_length=500)
   description = models.TextField(null=True, blank=True)

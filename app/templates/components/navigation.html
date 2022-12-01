@@ -3,16 +3,16 @@
 {% load tooling %}
 
 {% block content %}
-  <script type="text/javascript" src="{% static "js/navigation.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/components/navigation.js" %}"></script>
   <nav class="page-navigation" {% if homepage %} data-home="true" {% endif %}>
     <section class="container">
-      <section class="logo"></section>
+      <section class="logo" data-url="{% static 'assets/brands/SAIL/SAIL.png' %}"></section>
       <section class="buttons">
         <section class="items">
           {% url 'pages:home' as home_url %}
-          <a href="{% url 'pages:home' %}" id="Home" class="{% if request.path == home_url %}active{% endif %}">{% trans "Home" %}</a>
-          {% url 'phenotypes:phenotype' as phenotype_url %}
-          <a href="#" id="Phenotypes" class="{% if request.path|within:phenotype_url %}active{% endif %}">Phenotypes</a>
+          <a href="{{ home_url }}" id="Home" class="{% if request.path == home_url %}active{% endif %}">{% trans "Home" %}</a>
+          {% url 'phenotypes:phenotypes' as phenotype_url %}
+          <a href="{{ phenotype_url }}" id="Phenotypes" class="{% if request.path|within:phenotype_url %}active{% endif %}">Phenotypes</a>
           <a href="#" id="WorkingSets">WorkingSets</a>
           <a href="#" id="API">API</a>
           <a href="#" id="About">{% trans "About" %}</a>

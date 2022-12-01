@@ -67,6 +67,15 @@ const handleAnalyticsSection = () => {
 }
 
 
+const handleCarousel = () => {
+  const createBtn = document.getElementById('create-btn');
+  createBtn.addEventListener('click', (e) => {
+    const href = createBtn.getAttribute('data-href');
+    window.location.href = href;
+  });
+}
+
+
 /***************************************
  *                                     *
  *               Features              *
@@ -96,4 +105,5 @@ const handleFeaturesSection = () => {
 domReady.finally(() => {
   handleAnalyticsSection();
   handleFeaturesSection();
+  handleCarousel();
 });

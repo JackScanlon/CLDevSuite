@@ -38,6 +38,7 @@ $brand-map-none: (
   'accent-secondary': $soft_cyan,
   'accent-tertiary': $pixie_green,
   'accent-highlight': $mod_cyan,
+  'accent-query': $royal_blue,
   'accent-danger': $pastel_red,
   'accent-washed': $lightest_grey,
   'accent-dark': $black,
@@ -46,6 +47,7 @@ $brand-map-none: (
   'accent-off-body': $off_white,
   'accent-dark-wash': $mystic,
   'accent-purple': $solitude,
+  'accent-semi-transparent': rgba($black, 0.05),
 
   'masthead_gutter': 12rem,
   'masthead_mobile_gutter': 1rem,

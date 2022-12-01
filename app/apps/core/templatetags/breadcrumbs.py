@@ -44,7 +44,7 @@ def find_matching_url(items, desired):
       if match:
         return match
     elif isinstance(item, urls.URLPattern):
-      if str(item.pattern).replace('/', '') == desired:
+      if item.name == desired or str(item.pattern).replace('/', '') == desired:
         return item
   
   return None
@@ -78,6 +78,8 @@ def breadcrumbs(parser, token):
 
 
 class BreadcrumbsNode(template.Node):
+  DEFAULT_STR = '<section class="breadcrumbs"></section>'
+  
   def __init__(self, params, nodelist):
     self.request = template.Variable('request')
     self.params = params
@@ -95,7 +97,10 @@ class BreadcrumbsNode(template.Node):
     if len(crumbs) > 0:
       crumbs[-1]['url'] = rqst.get_full_path()
 
-    return generate_breadcrumbs(crumbs, header=self.params['includeHeader'])
+    if len(crumbs) > 1:
+      return generate_breadcrumbs(crumbs, header=self.params['includeHeader'])
+    else:
+      return self.DEFAULT_STR
 
   def map_resolver(self, path, rqst):
     crumbs = []
@@ -112,8 +117,11 @@ class BreadcrumbsNode(template.Node):
 
     if len(crumbs) > 0:
       crumbs[-1]['url'] = rqst.get_full_path()
-
-    return generate_breadcrumbs(crumbs, header=self.params['includeHeader'])
+    
+    if len(crumbs) > 1:
+      return generate_breadcrumbs(crumbs, header=self.params['includeHeader'])
+    else:
+      return self.DEFAULT_STR
 
   def render(self, context):
     rqst = self.request.resolve(context)
@@ -125,6 +133,6 @@ class BreadcrumbsNode(template.Node):
       else:
         return self.map_resolver(path, rqst)
     
-    output = '<section class="breadcrumbs"></section>'
+    output = self.DEFAULT_STR
 
     return output

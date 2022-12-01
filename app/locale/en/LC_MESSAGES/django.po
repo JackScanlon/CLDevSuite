@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-28 10:18+0000\n"
+"POT-Creation-Date: 2022-11-29 12:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/settings.py:151
+#: app/settings.py:152
 msgid "English"
 msgstr ""
 
 #: templates/account/_links.html:3
 #: templates/account/password_reset_from_key_done.html:8
-#: templates/components/navigation.html:12 templates/pages/home/index.html:6
+#: templates/components/navigation.html:13 templates/pages/home/index.html:6
 msgid "Home"
 msgstr ""
 
@@ -200,11 +200,11 @@ msgstr ""
 msgid "Contact Us"
 msgstr ""
 
-#: templates/components/navigation.html:16
+#: templates/components/navigation.html:18
 msgid "About"
 msgstr ""
 
-#: templates/components/navigation.html:18
+#: templates/components/navigation.html:20
 msgid "Login"
 msgstr ""
 
