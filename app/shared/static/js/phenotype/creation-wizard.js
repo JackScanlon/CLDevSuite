@@ -78,6 +78,7 @@ class CreationWizard {
       e.remove();
     });
 
+    creationView.querySelector('#codelist-search').value = '';
     creationView.querySelector('#no-codesearch-results').classList.add('show');
     creationView.querySelector('#no-components-result').classList.add('show');
     creationView.querySelector('#no-codelist-result').classList.add('show');
@@ -119,6 +120,40 @@ class CreationWizard {
       conceptsView.classList.add('show');
       creationView.classList.remove('show');
     }
+  }
+
+  #addCreationCode(code, inclusion, sourcetype, source) {
+    const element = new DOMParser().parseFromString(createConceptCodelistItem(code, inclusion, source, sourcetype), 'text/html').body.firstElementChild;
+    const codeitem = Object.assign(
+      code,
+      {
+        'source': source,
+        'source_type': sourcetype,
+        'inclusion': true,
+        'node': element,
+      }
+    );
+
+    const codelistView = document.querySelector('#creation-codelist-area');
+    const creationView = document.querySelector('#create-concept-view');
+    creationView.querySelector('#no-codelist-result').classList.remove('show');
+    codelistView.append(element);
+
+    this.currentConcept.codelist.push(codeitem);
+  }
+
+  #removeCreationCode(index) {
+    const codeitem = this.currentConcept.codelist[index];
+    codeitem.node.remove();
+    this.currentConcept.codelist.splice(index, 1);
+
+    const count = this.currentConcept.codelist.length;
+    if (count > 0) {
+      return;
+    }
+
+    const creationView = document.querySelector('#create-concept-view');
+    creationView.querySelector('#no-codelist-result').classList.add('show');
   }
 
   #renderSearchResults() {
@@ -171,10 +206,28 @@ class CreationWizard {
         const code = codes[i]
         const node = new DOMParser().parseFromString(createCodeSearchResult(code), 'text/html').body.firstElementChild;
         
-        const index = this.currentConcept.codelist.findIndex(e => e.id == code.id);
+        let index = this.currentConcept.codelist.findIndex(e => e.id == code.id);
         if (index >= 0) {
           node.querySelector('input[type="checkbox"]').setAttribute('checked', true);
         }
+
+        const checkbox = node.querySelector('input[type="checkbox"]');
+        checkbox.addEventListener('change', (e) => {
+          index = this.currentConcept.codelist.findIndex(x => x.id == code.id);
+          if (e.target.checked) {
+            if (index >= 0) {
+              return;
+            }
+
+            this.#addCreationCode(code, true, 'search-term', this.searchParams.query == '' ? 'Codelist' : this.searchParams.query);
+          } else {
+            if (index < 0) {
+              return;
+            }
+
+            this.#removeCreationCode(index);
+          }
+        });
 
         results.append(node);
       }
@@ -186,6 +239,12 @@ class CreationWizard {
     // Create concept(s)
     const createConceptBtn = document.querySelector('#create-concept-btn');
     createConceptBtn.addEventListener('click', e => {
+      if (this.currentConcept) {
+        document.querySelectorAll('.codelist-creation-item').forEach(e => {
+          e.remove();
+        });
+      }
+
       this.currentConcept = {
         'id': null,
         'name': '',
@@ -250,9 +309,6 @@ class CreationWizard {
         this.#renderSearchResults();
       }
     })
-
-    // Code handling
-    
   }
 
   #populateFields() {

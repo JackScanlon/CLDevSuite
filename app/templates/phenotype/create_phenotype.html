@@ -36,7 +36,7 @@
       <section class="steps-panel" onselectstart="return false;">
         <span class="wizard-header">Skip to step...</span>
         <span class="wizard-step-item" id="definition-step" data-value="1" data-target="definition-progress">Definition</span>
-        <span class="wizard-step-item" id="concept-step" data-value="2" data-target="concept-progress">Concets</span>
+        <span class="wizard-step-item" id="concept-step" data-value="2" data-target="concept-progress">Concepts</span>
         <span class="wizard-step-item" id="publication-step" data-value="3" data-target="publication-progress">Publication</span>
         <span class="wizard-step-item" id="validation-step" data-value="4" data-target="validation-progress">Validation</span>
         <span class="wizard-step-item" id="permissions-step" data-value="5" data-target="permission-progress">Permissions</span>
@@ -139,7 +139,7 @@
                       <input class="radio-chip table-view" type="radio" id="codelist-table-view" name="codelist-view" checked>
                       <label for="codelist-table-view">Table View</label>
                       <input class="radio-chip component-view" type="radio" id="codelist-component-view" name="codelist-view">
-                      <label for="codelist-component-view">Component View</label>
+                      <label for="codelist-component-view">Ruleset View</label>
                     </form>
                   </div>
                 </section>
@@ -156,7 +156,7 @@
                   <label>Description</label>
                   <label>Source</label>
                 </section>
-                <section class="codelist-content">
+                <section class="codelist-content" id="creation-codelist-area">
                   <div class="no-codes-item" id="no-codelist-result">
                     <p>You haven't added any codes yet</p>
                   </div>
@@ -166,8 +166,10 @@
             <section class="codelist-search" id="codelist-search-area">
               <section class="codelist-search-details">
                 <section class="details">
-                  <p class="input sm">Add Codes</p>
-                  <p class="description sm">You can import a codelist from file, or by searching below. You can search by term, which will match the code or description, or by wildcard. </p>
+                  <p class="input sm">Add Rules</p>
+                  <p class="description sm">You can import a codelist from file and apply it with a rule, or by searching below. Each ruleset is added in series but excluded rulesets override any conflicting codes.</p>
+                  <br/>
+                  <p class="description sm">You can search by term, which will match the code or description, or by wildcard. </p>
                   <br/>
                   <p class="description sm">To search by wildcard, please enter 'wildcard:' followed by a regex pattern.</p>
                   <p class="description sm">e.g. wildcard:a([0-9]*)</p>

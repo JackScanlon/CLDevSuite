@@ -28,6 +28,8 @@ const mergeObjects = (a, b) => {
   return a;
 }
 
+const matchesSelector = selector => callback => e => e.target.matches(selector) && callback(e);
+
 const getTransitionMethod = () => {
   const root = document.documentElement;
   for (let method in TRANSITION_METHODS) {

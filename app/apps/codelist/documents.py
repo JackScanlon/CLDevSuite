@@ -25,4 +25,3 @@ class CodeDocument(Document):
   def get_instances_from_related(self, related_instance):
     if isinstance(related_instance, CodingSystem):
       return related_instance.related_coding_system
-

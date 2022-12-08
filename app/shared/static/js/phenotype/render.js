@@ -57,43 +57,21 @@ const createConceptComponent = () => {
   </section>`
 }
 
-const createConceptCodelistItem = () => {
+const createConceptCodelistItem = (item, inclusion, source, sourcetype) => {
+  const { id, code, description } = item;
+
   return `
-  <div class="codelist-creation-item">
+  <div class="codelist-creation-item" data-id="${id}">
     <label class="rule" id="rule">
       <form class="rule-button-group">
-        <input class="ruleset-button include" aria-label="Inclusion Rule" type="radio" id="include" name="ruleset" checked>
+        <input class="ruleset-button include" aria-label="Inclusion Rule" type="radio" id="include" name="ruleset"` + (inclusion ? ' checked' : '') + `>
         <input class="ruleset-button exclude" aria-label="Exclusion Rule" type="radio" id="exclude" name="ruleset">
         <input class="ruleset-button remove" aria-label="Remove code" type="radio" id="remove" name="ruleset">
       </form>
     </label>
-    <label class="item" id="code">C30.0</label>
-    <label class="wrap" id="desc">Malignant neoplasms of respiratory and intrathoracic organs</label>
-    <label class="item" id="source"><a class="search-term" title="Search term used to find this code">"Neoplasms"</a></label>
-  </div>
-  <div class="codelist-creation-item">
-    <label class="rule" id="rule">
-      <form class="rule-button-group">
-        <input class="ruleset-button include" aria-label="Inclusion Rule" type="radio" id="include" name="ruleset" checked>
-        <input class="ruleset-button exclude" aria-label="Exclusion Rule" type="radio" id="exclude" name="ruleset">
-        <input class="ruleset-button remove" aria-label="Remove code" type="radio" id="remove" name="ruleset">
-      </form>
-    </label>
-    <label class="item" id="code">C30.0</label>
-    <label class="wrap" id="desc">Malignant neoplasms of respiratory and intrathoracic organs</label>
-    <label class="item" id="source"><a class="file-import" title="Imported from file">Imported.csv</a></label>
-  </div>
-  <div class="codelist-creation-item">
-    <label class="rule" id="rule">
-      <form class="rule-button-group">
-        <input class="ruleset-button include" aria-label="Inclusion Rule" type="radio" id="include" name="ruleset" checked>
-        <input class="ruleset-button exclude" aria-label="Exclusion Rule" type="radio" id="exclude" name="ruleset">
-        <input class="ruleset-button remove" aria-label="Remove code" type="radio" id="remove" name="ruleset">
-      </form>
-    </label>
-    <label class="item" id="code">C30.0</label>
-    <label class="wrap" id="desc">Malignant neoplasms of respiratory and intrathoracic organs</label>
-    <label class="item" id="source"><a class="concept-import" title="Imported from existing Concept">PH123/23 → C456/89</a></label>
+    <label class="item" id="code">${code}</label>
+    <label class="wrap" id="desc">${description}</label>
+    <label class="item" id="source"><a class="${sourcetype}">${source}</a></label>
   </div>`
 }
 
