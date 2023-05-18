@@ -1,18 +1,7 @@
 # Summary
-Dockerised Django Boilerplate for my personal use.
+Example reimplementation of Concept Library to demonstrate how a refactor could help us improve performance
 
-Boilerplate includes (with examples):
-  1. Django AllAuth
-  2. SCSS processor
-  3. Celery
-  4. Redis
-  5. ElasticSearch
-  6. Gunicorn
-  7. Nginx
-
-Localisation & Internationalisation is included, but can be turned off in the ```./env/app.compose.env``` configuration file.
-
-Leverages Gunicorn and Nginx for production builds.
+Boilerplate ref @ https://github.com/JackScanlon/DjangoBoilerplateExample
 
 # Superuser
 > **Note:** The default params for this development account can be changed in ```./env/app.compose.env```, or you can make changes to the tool in ```./app/tools/create_superuser.py```
