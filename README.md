@@ -1,5 +1,5 @@
 # Summary
-Example reimplementation of Concept Library to demonstrate how a refactor could help us improve performance
+Example reimplementation of [ConceptLibrary](https://github.com/SwanseaUniversityMedical/concept-library) to demonstrate how a refactor could help us improve performance
 
 Boilerplate ref @ https://github.com/JackScanlon/DjangoBoilerplateExample
 
